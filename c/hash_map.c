@@ -115,14 +115,14 @@ bool hash_table_delete(char *name)
 int main(void)
 {
     init_hash_table();
-    hash_node a = { "Vlad", 17, NULL};
-    hash_node c = { "Denys", 44, NULL};
-    hash_node d = { "Taras", 23, NULL};
-    hash_node b = { "123", 121, NULL};
-    hash_node f = { "Monay", 99, NULL};
-    hash_node g = { "Jasyi", 100, NULL};
-    hash_node h = { "Artem", 454, NULL};
-    hash_node i = { "John", 10, NULL};
+    hash_node a = { "1", 17, NULL};
+    hash_node c = { "2", 44, NULL};
+    hash_node d = { "3", 23, NULL};
+    hash_node b = { "4", 121, NULL};
+    hash_node f = { "5", 99, NULL};
+    hash_node g = { "6", 100, NULL};
+    hash_node h = { "7", 454, NULL};
+    hash_node i = { "8", 10, NULL};
 
     insert_in_hash_map(&a);
     insert_in_hash_map(&c);
@@ -133,11 +133,7 @@ int main(void)
     insert_in_hash_map(&i);
     insert_in_hash_map(&f);
     print_hash_table();
-    if (hash_table_lookup("Vlad") != false)
-        printf("Vlad was found!\n");
-    else
-        printf("Vlad wasn't found\n");
-    hash_table_delete("Vlad");
+    hash_table_delete("1");
     print_hash_table();
     return (0);
 }
