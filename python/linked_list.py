@@ -12,6 +12,16 @@ class LinkedList:
         self.tail = None
         self.length = 0
 
+    def get_item(self, index):
+        if index >= self.length:
+            return None
+        item = self.head
+        i = 0
+        while (i < index):
+            item = item.next
+            i += 1
+        return item.data
+
     def print_list(self):
         if self.length == 0:
             print("None")
@@ -81,8 +91,8 @@ class LinkedList:
 
 
 if __name__ == "__main__":
-    
     linked_list = LinkedList()
+    
     a = Node("A")
     b = Node("B")
     c = Node("C")

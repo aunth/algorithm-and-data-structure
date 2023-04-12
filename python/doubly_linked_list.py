@@ -26,6 +26,16 @@ class LinkedList:
             next = next.next
         print("None")
 
+    def get_item(self, index):
+        if index >= self.length:
+            return None
+        item = self.head
+        i = 0
+        while (i < index):
+            item = item.next
+            i += 1
+        return item.data
+
     def append(self, node: Node):
         if self.head == None:
             self.head = node
@@ -81,13 +91,6 @@ class LinkedList:
             prev.next = curr.next
         self.length -= 1
         return True
-
-def get_node(lst, index):
-    ptr = lst.head
-    i = 0
-    while (i != index):
-        ptr = ptr.next
-    return ptr
 
 
 if __name__ == "__main__":
