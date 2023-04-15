@@ -1,7 +1,6 @@
 
-
 class Node:
-    def __init__(self, value=0):
+    def __init__(self, value=None):
         self.data = value
         self.next = None
 
@@ -46,15 +45,14 @@ class LinkedList:
         return True
         
     def insert(self, node: Node, index: int) -> None:
-        print(f"Inserting...({node.data})")
         if index < 0:
             return False
-        if index == 0:
+        elif index >= self.length:
+            self.append(node)
+        elif index == 0:
             node.next = self.head
             self.head = node
             self.length += 1
-        elif index >= self.length:
-            self.append(node)
         else: 
             ptr = self.head
             i = 0
@@ -67,15 +65,20 @@ class LinkedList:
         return True
         
     def delete(self, index):
-        print("Deliting...")
-        if self.head is None:
+        if self.head == None:
             return False
         if index >= self.length or index < 0:
             return False
-        if index == 0:
+        if index == 0 and self.length > 1:
+            curr = self.head
             self.head = self.head.next
             self.length -= 1
         else:
+            if self.length == 1:
+                self.length -= 1
+                result = self.head.data
+                self.head = None
+                return result
             i = 1
             prev = self.head
             curr = self.head.next
@@ -87,7 +90,7 @@ class LinkedList:
                 self.tail = prev
             prev.next = curr.next
             self.length -= 1
-        return True
+        return curr.data
 
 
 if __name__ == "__main__":

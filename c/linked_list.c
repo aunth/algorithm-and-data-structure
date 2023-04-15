@@ -51,10 +51,6 @@ void append_node(LinkedList *lst, Node *node)
         lst->tail = node;
     }
     lst->length++;
-    // Node *ptr = lst->head;
-    // while (ptr->next != NULL)
-    //     ptr = ptr->next;
-    // ptr->next = node;
 }
 
 void insert(LinkedList *lst, Node *node, int index)
@@ -83,16 +79,18 @@ void insert(LinkedList *lst, Node *node, int index)
     lst->length++;
 }
 
-void delete_node(LinkedList *lst, int index)
+Node *delete_node(LinkedList *lst, int index)
 {
     if (lst->head == NULL)
-        return ;
+        return NULL;
     else if (index >= lst->length || index < 0)
-        return ;
+        return NULL;
     else if (index == 0)
     {
+        Node *result = lst->head;
         lst->head = lst->head->next;
-        return ;
+        lst->length--;
+        return result;
     }
     int i = 1;
     Node *prev = lst->head;
@@ -107,6 +105,7 @@ void delete_node(LinkedList *lst, int index)
         lst->tail = prev;
     prev->next = curr->next;
     lst->length--;
+    return curr;
 }
 
 void reverse_list(LinkedList *lst)
@@ -130,34 +129,34 @@ void reverse_list(LinkedList *lst)
 
 int main(void)
 {
-    Node i = {"Hello world", NULL};
-    LinkedList lst = { &i, &i, 1};
-    Node j = {"A", NULL};
-    append_node(&lst, &j);
-    Node k = {"B", NULL};
-    append_node(&lst, &k);
-    Node m = {"C", NULL};
-    insert(&lst, &m, 1);
-    Node w = {"D", NULL};
-    insert(&lst, &w, 0);
+    LinkedList lst = { NULL, NULL, 1};
+    Node a = {"A", NULL};
+    append_node(&lst, &a);
+    Node b = {"B", NULL};
+    Node c = {"C", NULL};
+    Node d = {"D", NULL};
+    Node e = {"E", NULL};
+    Node f = {"F", NULL};
+    append_node(&lst, &b);
+    printf("Top is  %s\n", lst.tail->value);
     print_linked_list(&lst);
-    delete_node(&lst, 4);
+    append_node(&lst, &c);
+    printf("Top is  %s\n", lst.tail->value);
     print_linked_list(&lst);
-    Node ll = {"H", NULL};
-    insert(&lst, &ll, 2);
+    append_node(&lst, &d);
+    printf("Top is  %s\n", lst.tail->value);
+    print_linked_list(&lst); 
+    append_node(&lst, &e);
+    printf("Top is  %s\n", lst.tail->value);
+    print_linked_list(&lst);
+    append_node(&lst, &f);
+    printf("Top is  %s\n", lst.tail->value);
+    print_linked_list(&lst);
+    delete_node(&lst, 2);
+    print_linked_list(&lst);
+    insert(&lst, &c, 1);
     print_linked_list(&lst);
     reverse_list(&lst);
-    Node *tmp;
-    unsigned int q = 0;
-    while (q < lst.length)
-    {
-        printf("%d\n", q);
-        tmp = get_node(&lst, q);
-        if (tmp->next != NULL)
-            printf("Next : %s\n", tmp->next->value);
-        else
-            printf("Next is NULL\n");
-        q++;
-    }
     print_linked_list(&lst);
+    
 }
