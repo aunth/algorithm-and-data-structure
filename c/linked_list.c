@@ -95,7 +95,7 @@ Node *delete_node(LinkedList *lst, int index)
     int i = 1;
     Node *prev = lst->head;
     Node *curr = lst->head->next;
-    while (i < index)
+    while (i < index-1)
     {
         i++;
         prev = curr;
@@ -140,23 +140,29 @@ int main(void)
     append_node(&lst, &b);
     printf("Top is  %s\n", lst.tail->value);
     print_linked_list(&lst);
+    printf("Head is %s, tail is %s\n", lst.head->value, lst.tail->value);
     append_node(&lst, &c);
     printf("Top is  %s\n", lst.tail->value);
     print_linked_list(&lst);
+    printf("Head is %s, tail is %s\n", lst.head->value, lst.tail->value);
     append_node(&lst, &d);
     printf("Top is  %s\n", lst.tail->value);
     print_linked_list(&lst); 
+    printf("Head is %s, tail is %s\n", lst.head->value, lst.tail->value);
     append_node(&lst, &e);
     printf("Top is  %s\n", lst.tail->value);
     print_linked_list(&lst);
+    printf("Head is %s, tail is %s\n", lst.head->value, lst.tail->value);
     append_node(&lst, &f);
     printf("Top is  %s\n", lst.tail->value);
     print_linked_list(&lst);
-    delete_node(&lst, 2);
+    printf("Head is %s, tail is %s\n", lst.head->value, lst.tail->value);
+    printf("Deliting..\n");
+    delete_node(&lst, lst.length-1);
     print_linked_list(&lst);
-    insert(&lst, &c, 1);
+    delete_node(&lst, lst.length-1);
     print_linked_list(&lst);
-    reverse_list(&lst);
+    insert(&lst, &f, 2);
     print_linked_list(&lst);
-    
+    return 0;
 }
