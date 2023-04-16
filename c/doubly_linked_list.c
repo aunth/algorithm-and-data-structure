@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct Node
 {
@@ -15,9 +16,27 @@ typedef struct LinkedList
     unsigned int length;
 } LinkedList;
 
-void print_linked_list(LinkedList lst)
+LinkedList *get_list()
 {
-    Node *ptr = lst.head;
+    LinkedList *lst = (LinkedList *) malloc(sizeof(LinkedList));
+    lst->head = NULL;
+    lst->length = 0;
+    lst->tail = NULL;
+    return lst;
+}
+
+Node *get_node(char *value)
+{
+    Node *node = (Node *) malloc(sizeof(Node));
+    node->value = value;
+    node->next = NULL;
+    node->prev = NULL;
+    return node;
+}
+
+void print_linked_list(LinkedList *lst)
+{
+    Node *ptr = lst->head;
     while (ptr->next != NULL)
     {
         printf("%s -> ", ptr->value);
@@ -28,7 +47,6 @@ void print_linked_list(LinkedList lst)
 
 void append_node(LinkedList *lst, Node *node)
 {
-    lst->length++;
     if (lst->head == NULL)
     {
         node->prev = NULL;
@@ -41,9 +59,10 @@ void append_node(LinkedList *lst, Node *node)
         lst->tail->next = node;
         lst->tail = node;
     }
+    lst->length++;
 }
 
-Node *get_node(LinkedList *lst, int index)
+Node *find_node(LinkedList *lst, int index)
 {
     if (index >= lst->length || index < 0)
         return NULL;
@@ -123,28 +142,40 @@ void delete_node(LinkedList *lst, int index)
     lst->length--;
 }
 
+void free_list(LinkedList *lst) {
+    Node *current = lst->head;
+    Node *next;
+    while (current != NULL) 
+    {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+    free(lst);
+}
+
 int main(void)
 {
-    LinkedList lst = {NULL, NULL, 0};
-    Node a = {"Hello", NULL, NULL};
-    Node b = {"World", NULL, NULL};
-    Node k = {"H", NULL, NULL};
-    append_node(&lst, &a);
-    append_node(&lst, &b);
-    Node c = {"A", NULL, NULL};
-    append_node(&lst, &c);
+    LinkedList *lst = get_list();
+    Node *a = get_node("Hello");
+    Node *b = get_node("World");
+    Node *k = get_node("H");
+    append_node(lst, a);
+    append_node(lst, b);
+    Node *c = get_node("A");
+    append_node(lst, c);
     print_linked_list(lst);
     Node d = {"B", NULL, NULL};   
-    insert(&lst, &d, 1);
+    insert(lst, &d, 1);
     print_linked_list(lst);
     int i = 0;
     print_linked_list(lst);
-    insert(&lst, &k, 2);
+    insert(lst, k, 2);
     print_linked_list(lst);
-    while (i < lst.length)
+    while (i < lst->length)
     {
         printf("%d\n", i);
-        Node *current = get_node(&lst, i);
+        Node *current = find_node(lst, i);
         if (current->prev != NULL)
             printf("Prev : %s\n", current->prev->value);
         else
