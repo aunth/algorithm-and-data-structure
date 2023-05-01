@@ -18,7 +18,7 @@ Stack *get_stack(void)
     lst->length = 0;
     stack->data = lst;
     stack->top = NULL;
-    return (stack);
+    return stack;
 }
 
 void push(Stack *stack, char *item)
@@ -27,7 +27,7 @@ void push(Stack *stack, char *item)
     node->value = item;
     node->next = NULL;
     stack->top = node;
-    append_node(stack->data, node);
+    append_node(stack->data, &node);
 }
 
 Node *pop(Stack *stack)
