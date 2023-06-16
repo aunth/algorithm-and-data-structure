@@ -37,27 +37,6 @@ class BinaryTree:
                 return True
         return False
     
-    # def remove(self, root, value):
-    #     if not root:
-    #         return False
-        
-    #     if value < root.value:
-    #         root = self.remove(root.left, value)
-    #     elif value > root.value:
-    #         root = self.remove(root.right, value)
-    #     else:
-    #         if not root.left:
-    #             return root.right
-    #         elif not root.right:
-    #             return root.left
-    #         else:
-    #             next = root.right
-    #             while next.left:
-    #                 next = next.left
-    #             root.value = next.value
-    #             self.remove(root.right, next.value)
-    #     return root
-    
     def remove(self, value):
         def remove_node(node, value):
             if not node:
@@ -95,6 +74,15 @@ class BinaryTree:
         self.print_node(node.left, prefix + ("|   " if is_left else "    "), True)
         self.print_node(node.right, prefix + ("|   " if not is_left else "    "), False)
 
+    def lookup_tree(self, node):
+        if node.left == None and node.right == None or node == None:
+            return
+        print(f"Value is {node.value}")
+        self.lookup_tree(node.left)
+        self.lookup_tree(node.right)
+
+
+
 
 
 if __name__ == "__main__":
@@ -106,5 +94,4 @@ if __name__ == "__main__":
     Tree.insert(10)
     Tree.insert(9)
     Tree.print_tree()
-    Tree.remove(8)
-    Tree.print_tree()
+    Tree.lookup_tree(Tree.root)
