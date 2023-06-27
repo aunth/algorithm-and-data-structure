@@ -1,2 +1,4 @@
 .vscode
-
+./algorithms/sorting/__pycache__/
+__pycache__
+algorithms/sorting/__pycache__/sorting_test.cpython-311.pyc
