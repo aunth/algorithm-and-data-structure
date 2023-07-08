@@ -1,6 +1,5 @@
 
-### Binary Heap implementation with list
-
+### Binary Heap(Min) implementation with list
 
 def swap(heap, i, j):
 	heap[i], heap[j] = heap[j], heap[i]
